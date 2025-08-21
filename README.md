@@ -1,12 +1,14 @@
-# Amazon-website-CICD-devsecops — Setup Guide
+# Amazon Shopping Website CICD DevSecOps — Setup Guide
 
 This README collects useful commands and links to install common DevOps, CI/CD, and security tooling on Ubuntu systems. It has been cleaned up, organized, and corrected for clarity. Always review commands for your environment and needs.
 
 > **Note:** Replace all `<VERSION>`, `<your-server-ip>`, `<jenkins-ip>`, `<sonar-ip-address>`, `<ACCOUNT_ID>`, and similar placeholders with your actual values.
 ---
-# For more project check out https://harishnshetty.github.io/projects.html
+# For more project check out 
+## https://harishnshetty.github.io/projects.html
 ---
-
+! [img alt] ( )
+---
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -315,13 +317,14 @@ Access: http://ip-address:3000
 Datasource: http://promethues-ip:9090
 
 ## Dashboard id 
+  - Node_Exporter 1860
 Docs: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
+  - jenkins       9964
 Docs: https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/
+  - kubernetes    18283
 Docs: https://grafana.com/grafana/dashboards/18283-kubernetes-dashboard/
 
-Node_exporter : 1860
-jenkins       : 9964
-K8s           : 18283
+
 
 ## Jenkins Plugins to Install
 
@@ -417,6 +420,7 @@ This guide covers the installation and setup for AWS CLI, `kubectl`, `eksctl`, a
 Refer: [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 ```bash
+sudo apt install -y unzip
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
@@ -665,8 +669,8 @@ sudo systemctl restart  prometheus.service
 
 ## Installing Argo CD on the eks cluster
 
-Docs: https://www.eksworkshop.com/docs/automation/gitops/argocd/access_argocd
-Docs: https://github.com/argoproj/argo-helm
+  - Docs: https://www.eksworkshop.com/docs/automation/gitops/argocd/access_argocd
+  - Docs: https://github.com/argoproj/argo-helm
 
 # Argocd installation via helm chart
 
@@ -698,7 +702,8 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 Password: encrypted-password
 ---
 
-## 16. Delete EKS Cluster (Cleanup) finally u done a project for more conents reach out https://harishnshetty.github.io/projects.html
+##  Delete EKS Cluster (Cleanup) finally u done a project 
+ - For more conents reach out https://harishnshetty.github.io/projects.html
 
 ```bash
 eksctl delete cluster --name my-cluster --region ap-south-1

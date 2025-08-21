@@ -405,7 +405,7 @@ Webhook example:
 
 
 
-
+## EKS ALB Ingress Kubernetes Setup Guide
 # EKS cluster setup and  ALB Ingress Kubernetes Setup Guide
 
 This guide covers the installation and setup for AWS CLI, `kubectl`, `eksctl`, and `helm`, and creating/configuring an EKS cluster with AWS Load Balancer Controller.
@@ -637,7 +637,7 @@ eksctl delete cluster --name my-cluster --region ap-south-1
 ---
 
 ## 
-## 14. Monitor Kubernetes with Prometheus
+## Monitor Kubernetes with Prometheus
 
 **Install Node Exporter using Helm:**
 
@@ -663,7 +663,7 @@ sudo systemctl restart  prometheus.service
 
 ---
 
-## 15. Installing Argo CD on the eks cluster
+## Installing Argo CD on the eks cluster
 
 Docs: https://www.eksworkshop.com/docs/automation/gitops/argocd/access_argocd
 Docs: https://github.com/argoproj/argo-helm

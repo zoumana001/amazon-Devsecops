@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: amazon-ns
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amazon-app-deployment
+  namespace: amazon-ns
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: amazon-app
+  template:
+    metadata:
+      labels:
+        app: amazon-app
+    spec:
+      containers:
+        - name: amazon-app-container
+          image: harishnshetty/amazon:latest  # Use your actual Docker image name and tag
+          ports:
+            - containerPort: 80  # The port your game app is listening on
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: amazon-app-service
+  namespace: amazon-ns
+spec:
+  selector:
+    app: amazon-app
+  ports:
+    - protocol: TCP
+      port: 80  # The port exposed by the service within the cluster
+      targetPort: 80  # The port your game app is listening on inside the pod
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  namespace: amazon-ns
+  annotations:
+    # ALB Scheme
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/load-balancer-name: store-ns-alb
+
+    # Target Mode
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+
+    # Health Checks
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/success-codes: '200'
+
+    # SSL
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:970378220457:certificate/aad8e284-b7e2-4e0d-8426-ebaf59fafb1d # Replace with your ACM certificate ARN
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+spec:
+  ingressClassName: alb
+  rules:
+    # Android store domain
+    - host: amazon.harishshetty.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: amazon-app-service
+                port:
+                  number: 80

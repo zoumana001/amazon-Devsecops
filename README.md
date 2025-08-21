@@ -621,11 +621,11 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 
 ```bash
 
-git clone https://github.com/harishnshetty/2048-React-CICD-devsecops.git
-cd 2048-React-CICD-devsecops/k8s/
+git clone https://github.com/harishnshetty/amazon-Devsecops.git
+cd amazon-Devsecops/k8s-80
 
 kubectl apply -f .
-kubectl config set-context --current --namespace=game-ns
+kubectl config set-context --current --namespace=amazon-ns
 kubectl get ingress -w
 kubectl delete -f .
 ```
@@ -693,7 +693,7 @@ sudo apt install jq -y
 kubectl get svc argocd-server -n argocd -o json | jq --raw-output '.status.loadBalancer.ingress[0].hostname'
 ```
 
-Username: admin,
+Username: admin
 
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d

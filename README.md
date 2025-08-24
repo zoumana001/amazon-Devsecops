@@ -521,21 +521,7 @@ aws configure
 aws configure list
 ```
 
----
-## EKS Cluster create with Node-group
-```bash
-eksctl create cluster \
-  --name my-cluster1 \
-  --region ap-south-1 \
-  --version 1.33 \
-  --nodegroup-name my-nodes-ng \
-  --nodes 2 \
-  --nodes-min 2 \
-  --nodes-max 6 \
-  --node-type t3.medium
 
-
-```
 ---
 
 ## 6. Create EKS Cluster and Nodegroup (Try-This)

@@ -97,6 +97,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: iphone-service # or your default frontend
+                name: amazon-app-service # or your default frontend
                 port:
                   number: 80

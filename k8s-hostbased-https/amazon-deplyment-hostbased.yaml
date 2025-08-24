@@ -88,3 +88,15 @@ spec:
                 name: amazon-app-service
                 port:
                   number: 80
+
+    # 👇 Default catch-all (matches any host not listed above)
+    - host: ""
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: iphone-service # or your default frontend
+                port:
+                  number: 80

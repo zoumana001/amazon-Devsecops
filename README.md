@@ -662,6 +662,8 @@ Add to `/etc/prometheus/prometheus.yml`:
     static_configs:
       - targets: ['node1Ip:9100']
 ```
+  - Docs: https://grafana.com/grafana/dashboards/17119-kubernetes-eks-cluster-prometheus/
+ID FOR EKS 17119
 
 Validate config:
 ```bash

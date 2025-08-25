@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: amazon-app-container
-          image: harishnshetty/amazon:2  # Use your actual Docker image name and tag
+          image: harishnshetty/amazon:latest  # Use your actual Docker image name and tag
           ports:
             - containerPort: 80  # The port your game app is listening on
           resources:
@@ -55,14 +55,14 @@ metadata:
   namespace: amazon-ns
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/load-balancer-name: store-ns-alb
+    alb.ingress.kubernetes.io/load-balancer-name: amazon-ns-alb
     # Target Type and Listener Port
 
 
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
 
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:970378220457:certificate/aad8e284-b7e2-4e0d-8426-ebaf59fafb1d # Replace with your ACM certificate ARN
+    alb.ingress.kubernetes.io/certificate-arn: <your arn value> # Replace with your ACM certificate ARN
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
   ingressClassName: alb

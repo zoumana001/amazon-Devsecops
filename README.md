@@ -38,11 +38,11 @@ This README collects useful commands and links to install common DevOps, CI/CD, 
 | HTTP            | 80    |
 | HTTPS           | 443   |
 | SSH             | 22    |
-| Jenkins         | 8080  |
-| SonarQube       | 9000  |
-| Prometheus      | 9090  |
-| Node Exporter   | 9100  |
-| Grafana         | 3000  |
+| Jenkins         |       |
+| SonarQube       |       |
+| Prometheus      |       |
+| Node Exporter   |       |
+| Grafana         |       |
 
 ---
 

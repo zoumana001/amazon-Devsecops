@@ -89,7 +89,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
-                        sh "docker login -u zoum444 -p ${dockerpwd}"
+                        sh "docker login -u zoum44 -p ${dockerpwd}"
                         sh "docker tag amazon ${env.IMAGE_TAG}"
                         sh "docker push ${env.IMAGE_TAG}"
 

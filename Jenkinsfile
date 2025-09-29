@@ -89,13 +89,20 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
-                        sh "docker login -u zoum44 -p ${dockerpwd}"
-                        sh "docker tag amazon ${env.IMAGE_TAG}"
-                        sh "docker push ${env.IMAGE_TAG}"
+                        // SAFE login (no Groovy interpolation, no -p flag) and correct username
+                        sh '''
+                          set -e
+                          echo "$dockerpwd" | docker login -u "zoum444" --password-stdin
 
-                        // Also push latest
-                        sh "docker tag amazon zoum444/amazon:latest"
-                        sh "docker push zoum444/amazon:latest"
+                          docker tag amazon "$IMAGE_TAG"
+                          docker push "$IMAGE_TAG"
+
+                          # Also push latest
+                          docker tag amazon "zoum444/amazon:latest"
+                          docker push "zoum444/amazon:latest"
+
+                          docker logout || true
+                        '''
                     }
                 }
             }
@@ -158,7 +165,6 @@ pipeline {
     }
 }
 }
-
 
 
 

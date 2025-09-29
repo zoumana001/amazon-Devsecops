@@ -75,7 +75,8 @@ pipeline {
         stage("Build Docker Image") {
             steps {
                 script {
-                    env.IMAGE_TAG = "zoum444/amazon:${BUILD_NUMBER}"
+                    // CHANGED: push namespace -> zoum44
+                    env.IMAGE_TAG = "zoum44/amazon:${BUILD_NUMBER}"
 
                     // Optional cleanup
                     sh "docker rmi -f amazon ${env.IMAGE_TAG} || true"
@@ -89,17 +90,17 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
-                        // SAFE login (no Groovy interpolation, no -p flag) and correct username
+                        // CHANGED: login as 'zoum44' + safe stdin token
                         sh '''
                           set -e
-                          echo "$dockerpwd" | docker login -u "zoum444" --password-stdin
+                          echo "$dockerpwd" | docker login -u "zoum44" --password-stdin
 
                           docker tag amazon "$IMAGE_TAG"
                           docker push "$IMAGE_TAG"
 
                           # Also push latest
-                          docker tag amazon "zoum444/amazon:latest"
-                          docker push "zoum444/amazon:latest"
+                          docker tag amazon "zoum44/amazon:latest"
+                          docker push "zoum44/amazon:latest"
 
                           docker logout || true
                         '''
@@ -165,6 +166,3 @@ pipeline {
     }
 }
 }
-
-
-
